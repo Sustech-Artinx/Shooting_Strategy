@@ -30,3 +30,5 @@ f3 = f1 - HP_lose;
 UB = [30]
 LB = [0]
 HP_lose = heating(fc,V0,V1); % HP_lose > 0
+
+x = V1;
