@@ -1,11 +1,14 @@
 function value = Fitness(x)
 	V1 = x(1);
-	fs = x(2);
+	sf = x(2);
 	hit_rate = 1;
 	% AD = 50;
 	global AD;
-	f = hit(hit_rate,AD,fs);
-	value = f;
+	global fc;
+	f1 = -hit(hit_rate,AD,sf);
+	f2 = heating (fc,V1,sf);
+	f = f1 + f2;
+	value = [f1  f2]';
 end
 
 	%%%%% BfK Function %%%%%
@@ -20,6 +23,6 @@ end
 
  %%%% hiting damage %%%%%%
 
- function damage = hit(hit_rate, AD,fs)
-   damage = hit_rate * AD * fs;
+ function damage = hit(hit_rate, AD,sf)
+   damage = hit_rate * AD * sf;
  end

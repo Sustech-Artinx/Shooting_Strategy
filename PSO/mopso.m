@@ -1,6 +1,6 @@
 clc;
-clear;
-close all;
+% clear;
+% close all;
 
 %% Problem Definition
 
@@ -37,19 +37,19 @@ gamma=2;            % Deletion Selection Pressure
 
 mu=0;             % Mutation Rate
 
-%%% Shooting Parameters
-global AD;
-AD = 50;
-global HP_max;
-HP_max = 750;
-global Q1;
-Q1 = 1500;
-global cooling_rate;
-cooling_rate = 500;
-global   V0; % maximum shootin velocity
-V0 = 30;
-global fc;
-fc = 10;
+% %%% Shooting Parameters
+% global AD;
+% AD = 50;
+% global HP_max;
+% HP_max = 750;
+% global Q0;
+% Q0 = 1600;
+% global cooling_rate;
+% cooling_rate = 500;
+% global   V0; % maximum shootin velocity
+% V0 = 30;
+% global fc;
+% fc = 10;
 
 %% Initialization
 
@@ -183,9 +183,9 @@ for it=1:MaxIt % Iterate in the limitation
     end
 
     % Plot Costs
-    figure(1);
-    PlotCosts(pop,rep);
-    pause(0.01);
+    % figure(1);
+    % PlotCosts(pop,rep);
+    % pause(0.01);
 
     % Show Iteration Information
     disp(['Iteration ' num2str(it) ': Number of Rep Members = ' num2str(numel(rep))]);
@@ -194,6 +194,5 @@ for it=1:MaxIt % Iterate in the limitation
     w=w*wdamp;
 
 end
-
+optima = findOptima(rep)
 %% Resluts
-optima = findOptima(rep);
