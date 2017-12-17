@@ -22,9 +22,9 @@ CostFunction=@(x) Fitness(x);      % Cost Function
 
 MaxIt=200;           % Maximum Number of Iterations
 
-nPop=150;            % Population Size
+nPop=100;            % Population Size
 
-nRep=100;            % Repository Size
+nRep=50;            % Repository Size
 
 w=0.9;              % Inertia Weight
 wdamp=0.99;         % Intertia Weight Damping Rate
@@ -40,6 +40,18 @@ epsilon = 1;        % Relative Weight on each function
 
 mu=0.4;             % Mutation Rate
 
+%%% Shooting Parameters
+global AD;
+AD = 50;
+global HP_max;
+HP_max = 750;
+global Q1;
+Q1 = 1500;
+global cooling_rate;
+cooling_rate = 500;
+global   V0; % maximum shootin velocity
+V0 = 30;
+
 %% Initialization
 
 empty_particle.Position=[];
@@ -50,6 +62,7 @@ empty_particle.Best.Cost=[];
 empty_particle.IsDominated=[];
 empty_particle.GridIndex=[];
 empty_particle.GridSubIndex=[];
+empty_particle.HP_L = [];
 
 empty_particle.PF=[];% Feseability of personal best position
 empty_particle.CF=[];% Feseability of current position
@@ -68,6 +81,8 @@ for i=1:nPop
 
     %Evaluate Cost
     pop(i).Cost=CostFunction(pop(i).Position);
+    % Evaluate heating
+    pop(i).HP_L =heating(10,pop(i).Position(1),pop(i).Position(2));
 
     %Initialize Feasibility
     pop(i).CF = fesibJudge(pop(i),VarMinF,VarMaxF,nVar);
@@ -115,6 +130,9 @@ for it=1:MaxIt % Iterate inside the limitation
 
          % Evaluate Cost
         pop(i).Cost = CostFunction(pop(i).Position);
+
+        % Evaluate heating
+        pop(i).HP_L =heating(10,pop(i).Position(1),pop(i).Position(2));
 
         % Evaluate Feasiblity
         pop(i).CF = fesibJudge(pop(i),VarMinF,VarMaxF,nVar);
@@ -218,22 +236,34 @@ if rem(it,5) == 0
             fprintf('  %s%% ',num2str(finRate));
             fprintf(']');
     end
+
+    figure(1),
+        rep_costs=[pop.Cost];
+
+        % rep_pos = [rep.Position];
+        % plot(rep_costs(1,:),'r*');
+        plot([pop.HP_L],[pop.Cost]);
+        xlabel('index');
+        ylabel('Cost');
+        grid on;
+        hold on;
+        pause(0.05);
 end
 
 %% Results
-optima = FindOptima(rep,beta);
-
- for i = 1 : numel(rep)
-    fprintf('Cost functions:\nf1: %d\nf2: %d\n',optima.Cost(1),optima.Cost(2));
-    fprintf('Grid Index: %d\nGrid SubIndex %d (x) and %d (y)\n\n',optima.GridIndex(1),optima.GridSubIndex);
-end
-% Plot Pareto Surface
-figure;
-    rep_costs=[rep.Cost];
-    plot(rep_costs(1,:),rep_costs(2,:),'r*');
-    xlabel('1^{st} Objective');
-    ylabel('2^{nd} Objective');
-    grid on;
-    hold on;
-% Plot Optima
-plot(optima.Cost(1,:),optima.Cost(2,:),'bs','MarkerSize',15);
+% optima = FindOptima(rep,beta);
+%
+%  for i = 1 : numel(rep)
+%     fprintf('Cost functions:\nf1: %d\nf2: %d\n',optima.Cost(1),optima.Cost(2));
+%     fprintf('Grid Index: %d\nGrid SubIndex %d (x) and %d (y)\n\n',optima.GridIndex(1),optima.GridSubIndex);
+% end
+% % Plot Pareto Surface
+% figure;
+%     rep_costs=[rep.Cost];
+%     plot(rep_costs(1,:),rep_costs(2,:),'r*');
+%     xlabel('1^{st} Objective');
+%     ylabel('2^{nd} Objective');
+%     grid on;
+%     hold on;
+% % Plot Optima
+% plot(optima.Cost(1,:),optima.Cost(2,:),'bs','MarkerSize',15);

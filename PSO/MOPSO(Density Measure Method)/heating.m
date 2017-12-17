@@ -1,20 +1,19 @@
 function HP_lose = heating (fc,V1,sf)
-  % AD = 50;
+  % AD = 30;
   % HP_max = 750;
   % Q1 = 1500;
   % cooling_rate = 500;
-  % V0 = 30;
   global AD;
+  global Q0;
   global HP_max;
   global cooling_rate;
   global V0;
-  global Q0;
-  Q1 = 0;
+  Q0 = 0;
   cool_times = 1*fc;
   HP_lose = 0;
   HP_lose_c = 0;
   HP_lose_g = 0;
-  bullet_num = ceil(sf * 1.0 / cool_times); % bullet number per cooling period
+  bullet_num = ceil(sf / cool_times); % bullet number per cooling period
   for i  = 1 : cool_times
     % Gaining Heat
     for j = 1 : bullet_num
@@ -29,10 +28,6 @@ function HP_lose = heating (fc,V1,sf)
   HP_lose = HP_lose_c + HP_lose_g;
   if (HP_lose > HP_max)
     HP_lose = HP_max;
-  else if (HP_lose < 0)
-    HP_lose = 0;
-  end
-
   end
 end
 

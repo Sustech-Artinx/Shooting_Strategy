@@ -13,27 +13,21 @@ function feasibleState=fesibJudge(particle,VarMinF,VarMaxF,nVar)
 % %         disp(fesiableState);
 % %         disp('roundend ');
 %     end
-  global AD;
-  global HP_max;
-  global cooling_rate;
-  global V0;
-  global Q0;
   fc = 10; % refresh frequency
   x  = particle.Position;
   V1 = x(1);% bullet velocity
-  sf = x(2);% shooting frequency
+  fs = x(2);% shooting frequency
   feasibleState = true;
   for i = 1 : nVar
     if (x(i) > VarMaxF(i) || x(i) < VarMinF(i))
       feasibleState = feasibleState & false;
     end
   end
-  % HP_lose = heating(fc,V1,sf);
-  HP_lose = particle.HP_L;
-  if ( HP_lose > 0 )
-    feasibleState = false;
-  else
-    feasibleState = true & feasibleState;
-  end
+  % HP_lose = heating(fc,V0,V1,fs);
+  % if ( HP_lose > 0 )
+  %   feasibleState = false;
+  % else
+  %   feasibleState = true & feasibleState;
+  % end
 
 end
