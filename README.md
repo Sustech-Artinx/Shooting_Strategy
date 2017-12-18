@@ -7,6 +7,14 @@ Two parts are contained in this rep:
 1. Mathematical Models, both for HP_lose because of a over heating gun and for damage on enemy
 2. Optimization Algorithm : At present, only PSO is included. (which is bascially because I'm not familiar with any other optimization method )
 
+#### *Update*
+<br>Two optimization algorithm are provided now </br>
+1. Naive PSO, as its name, is for naive optimization problems.
+2. MOPSO (superposition) is a improved PSO algorithm with feasible area method.
+
+If you are interesetd in the optimization algorithm, you might want to take a look at my previous work with Institude of Manufacturing Engineering, Tsinghua University at :
+https://github.com/DeriZSY/hybrid_mopso
+
 ---
 ## Stage One : Naive Model (Already done)
 
