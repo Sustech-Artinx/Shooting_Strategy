@@ -12,14 +12,14 @@ function value = Fitness(x)
 	%% Model One
 	value = [f1  f2]';
 
-	%% Model Tow
-	f = f1 + f2;
-	value = [f 0]';
+	% %% Model Tow
+	% f = f1 + f2;
+	% value = [f 0]';
 
-	%% Model Three
-	range = shooting_range(V1);
-	f = f1 + f2;
-	value = [f range]';
+	% %% Model Three
+	% range = shooting_range(V1);
+	% f = f1 + f2;
+	% value = [f range]';
 
 end
 
