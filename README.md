@@ -8,41 +8,45 @@ Two parts are contained in this rep:
 2. Optimization Algorithm : At present, only PSO is included. (which is bascially because I'm not familiar with any other optimization method )
 
 ---
-Result 1:
-By miniziing HP lost due to penalty on shooting speed and shooting frequency and maximizing damage on a single car, we got the first version of
-global optima:
+## Stage One : Naive Model (Already done)
 
-### Parameters:
+### Assumptions :
 
-  AD = 50;
-  Cooling Rate = 500;
-  Refreshing Frequency = 10 times/s
-  On Target Rate = 1;
+1. Continuous shooting without a pause.
+2. 100% on-target rate
+3. Minimize HP lost due to over heat
+4. Maximize Damage
+5. Bounded shooting frequency and bounded shooting frequency.
 
-### Results :
 
-#### Infantry
-##### Grade 1 Infantry
- 
-  Shooting Frequency : 5 bullets/s
-  Shooting Speed     : 14m/s
-  Damage             : 250 blood/s
+### Result :
+  The HP lost increases with the increase of either shooting frequency and shooting speed; while the damage only increases with the incrase of shooting frequency. Obviously, to maximize the damage and minize HP lost, we should first set shooting frequency to the maximum possible value, and then adjust the shooting speed to the maximum possible value with 0 HP lost.
 
-##### Grade 2 Infantry
-  Shooting Frequency : 5
-  Shooting Speed     : 19
-  Damage             : 250
+####  *Note*
+<br> PSO Algorithm used in this rep cannot find the exact global optima. Instead, it will reach somewhere nearby; I personally believe that this algorithm has some advancement as the requirement of modeling become more and more complex </br>
 
-##### Grade 3 Infantry
-  Shooting Frequency : 5
-  Shooting Speed     : 23
-  Damage             : 250
+### GAPS:
 
-#### Sentinal
-Shooting Frequency : 5
-Shooting Speed     : 24
-Damage             : 250
+1. Real boundary for shooting paramters, and real control model for shooting paramters (e.g. a process of acceleartion might need to be taken into consider )
+2. Time gaps between shooting
+3. Real on-target rate
+4. Real shooting range (e.g. might include a model for long range shooting and a model for short range shooting )
 
-#### Hero
+---
 
-##### Grade 1 Hero
+## Stage Two :
+
+### Improvement :
+
+1. Using HP lost as a penlaty (instead of an objective )
+2. Maximize neat damage
+
+---
+
+## Stage Three :
+
+### Improvement :
+
+1. Shooting with pause model
+2. Real shooting model
+3. Real shooting range
