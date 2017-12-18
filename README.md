@@ -12,6 +12,11 @@ Two parts are contained in this rep:
 1. Naive PSO, as its name, is for naive optimization problems.
 2. MOPSO (superposition) is a improved PSO algorithm with feasible area method.
 
+
+*Noice*
+<br>In both algorithms, there are some problems with mutation operator and the running time increase a lot when mutation operator is used.</br> 
+
+
 If you are interesetd in the optimization algorithm, you might want to take a look at my previous work at :
 https://github.com/DeriZSY/hybrid_mopso
 
